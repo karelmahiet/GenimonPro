@@ -151,6 +151,7 @@ void Combat::transition() {
     ui->Attaque->setVisible(false);
     ui->Bloquer->setVisible(false);
     ui->Bonus->setVisible(false);
+    ui->Alerte->setVisible(false);
 }
 
 
@@ -176,13 +177,8 @@ void Combat::combat() {
     ui->Attaque->setVisible(true);
     ui->Bloquer->setVisible(true);
     ui->Bonus->setVisible(true);
+	ui->Alerte->setVisible(false);
     initialiserCombat();
-}
-
-void Combat::info() {
-
-    ui->Nom1->setText(QString("Nom: %1").arg("Dylan"));// a remplacer par nom classe genimon
-    ui->Nom2->setText(QString("Nom: %1").arg("Moi"));// a remplacer par nom classe genimon
 }
 
 void Combat::recevoirInfos(Genimon ennemi, int* nbBalles, int* nbCapsuleGuerison, std::vector<Genimon>* genidex) {
@@ -191,7 +187,7 @@ void Combat::recevoirInfos(Genimon ennemi, int* nbBalles, int* nbCapsuleGuerison
     genimonEnnemi = new Genimon(ennemi);
 
     if (genidex && !genidex->empty()) {
-        genimonJoueur = new Genimon(genidex->at(0));
+        genimonJoueur = &genidex->at(0);
     }
     else {
         genimonJoueur = nullptr;
@@ -223,7 +219,7 @@ void Combat::btnAttaquer()
     if (actionsJoueur.size() < nbToursJoueur)
     {
         actionsJoueur.push_back(1);
-        ui->TableauInfo->setText("Action " + QString::number(actionsJoueur.size()) + "/" + QString::number(nbToursJoueur) + ": Attaque");
+        ui->TableauInfo->setText("Action " + QString::number(actionsJoueur.size()) + "/" + QString::number(nbToursJoueur));
         ui->Nb_attaque->setText("NbAttaque: " + QString::number(nbAtt -= 1));
     }
 
@@ -241,14 +237,20 @@ void Combat::btnBouclier()
     if (!genimonJoueur || genimonEnnemi->getPV() <= 0 || genimonJoueur->getPV() <= 0)
         return;
 
-    if (actionsJoueur.size() < nbToursJoueur)
+    if (actionsJoueur.size() < nbToursJoueur && bouclierJoueurActif == false)
     {
         actionsJoueur.push_back(2);
         bouclierJoueurActif = true;
 
-        ui->TableauInfo->setText("Action " + QString::number(actionsJoueur.size()) + "/" + QString::number(nbToursJoueur) + ": Bouclier");
+        ui->TableauInfo->setText("Action " + QString::number(actionsJoueur.size()) + "/" + QString::number(nbToursJoueur));
         ui->Nb_bouclier->setText("NbBouclier: " + QString::number(nbBou -= 1));
-    }
+        bouclierJoueurActif = true;
+	}
+	else if (bouclierJoueurActif == true)
+	{
+		ui->TableauInfo->setText("Tu as deja un bouclier ! \nChoisi une autre action");
+		return;
+	}
 
     if (actionsJoueur.size() == nbToursJoueur)
     {
@@ -265,7 +267,7 @@ void Combat::gererCombatTourAdversaire()
 
     ui->TableauInfo->setText("Tour de " + QString::fromStdString(genimonEnnemi->getNom()));
 
-    QTimer::singleShot(3000, this, [=]() {
+    QTimer::singleShot(4000, this, [=]() {
         //bonus ennemi
         nbToursAdversaire += nbBonusAdversaire;
         nbBonusAdversaire = 0;
@@ -296,13 +298,13 @@ void Combat::gererCombatTourAdversaire()
             bouclierEnnemiActif = true;
         }
 
-        QString resume = QString("Actions: %1 attaque(s), %2 bouclier(s), %3 bonus")
+        QString resume = QString("Actions:\n%1 attaque(s),\n%2 bouclier(s),\n%3 bonus")
             .arg(nbAttaquesAdversaire)
             .arg(nbBoucliersAdversaire)
             .arg(nbBonusAdversaire);
         ui->TableauInfo->setText(resume);
 
-        QTimer::singleShot(3000, this, [=]() {
+        QTimer::singleShot(4000, this, [=]() {
             int totalDegats = 0;
 
             for (int i = 1; i <= nbAttaquesAdversaire; i++) {
@@ -321,13 +323,14 @@ void Combat::gererCombatTourAdversaire()
 
             ui->HP1->setText("PV : " + QString::number(genimonJoueur->getPV()) + " / " + QString::number(genimonJoueur->pvMax));
             ui->TableauInfo->setText(QString::fromStdString(genimonEnnemi->getNom()) +
-                " attaque et inflige " + QString::number(totalDegats) + " degats !");
+                " inflige " + QString::number(totalDegats) + " degats !");
 
             //check si joueur est mort
             if (genimonJoueur->getPV() <= 0) {
                 combatTermine = true;
                 QTimer::singleShot(4000, this, [=]() {
-                    ui->TableauInfo->setText(QString::fromStdString(genimonJoueur->getNom()) + " est K.O. ! (4 = map)");
+                    (*genimonJoueur).setPV(genimonJoueur->getPV());
+                    ui->TableauInfo->setText(QString::fromStdString(genimonJoueur->getNom()) + " est K.O. , \ntu as perdu... \n4 = retour a la map");
                     });
                 return;
             }
@@ -339,8 +342,8 @@ void Combat::gererCombatTourAdversaire()
             bouclierJoueurActif = false;
             tourAdversaireEnCours = false;
 
-            QTimer::singleShot(3000, this, [=]() {
-                ui->TableauInfo->setText("A ton tour ! Tu as " + QString::number(nbToursJoueur) + " actions.");
+            QTimer::singleShot(4000, this, [=]() {
+                ui->TableauInfo->setText("A ton tour ! \nTu as " + QString::number(nbToursJoueur) + " actions.");
                 });
             });
         });
@@ -358,14 +361,14 @@ void Combat::btnBonus()
 
     if (nbBonusJoueur >= 4)
     {
-        ui->TableauInfo->setText("Tu as déjà 4 bonus maximum !");
+        ui->TableauInfo->setText("Tu as deja 4 bonus maximum ! \nChoisi une autre action");
         return;
     }
 
     if (actionsJoueur.size() < nbToursJoueur)
     {
         actionsJoueur.push_back(3);
-        ui->TableauInfo->setText("Action " + QString::number(actionsJoueur.size()) + "/" + QString::number(nbToursJoueur) + ": Bonus");
+        ui->TableauInfo->setText("Action " + QString::number(actionsJoueur.size()) + "/" + QString::number(nbToursJoueur));
         ui->Nb_bonus->setText("NbBonus: " + QString::number(nbBon -= 1));
     }
 
@@ -385,8 +388,8 @@ void Combat::executerActionsJoueur()
     indexActionJoueur = 0;
     //check si bot est mort
     if (genimonEnnemi->getPV() <= 0) {
-        QTimer::singleShot(3000, this, [=]() {
-            ui->TableauInfo->setText(QString::fromStdString(genimonEnnemi->getNom()) + " est K.O. ! (4 = map)");
+        QTimer::singleShot(4000, this, [=]() {
+            ui->TableauInfo->setText(QString::fromStdString(genimonEnnemi->getNom()) + " est K.O. , \ntu as gagne! \n4 = retour a la map");
             });
     }else
     executerActionSuivante();
@@ -401,13 +404,13 @@ void Combat::executerActionSuivante()
 
         nbToursJoueur = 2 + bonusGagnesCeTour;
         bonusGagnesCeTour = 0;
-        ui->TableauInfo->setText("Fin du tour ! Tu auras " + QString::number(nbToursJoueur) + " actions au prochain tour.");
+        ui->TableauInfo->setText("Fin du tour ! Tu auras " + QString::number(nbToursJoueur) +"\nactions au prochain tour.");
 
         nbBoucliersJoueur = 0;
         nbAttaquesJoueur = 0;
         attenteActions = false;
 
-        QTimer::singleShot(3000, this, [=]() {
+        QTimer::singleShot(4000, this, [=]() {
             gererCombatTourAdversaire();
             });
         return;
@@ -424,24 +427,26 @@ void Combat::executerActionSuivante()
         }
         else {
             genimonEnnemi->varierPV(-degats);
+            ui->TableauInfo->setText(QString::fromStdString(genimonJoueur->getNom()) +
+                " attaque et inflige " + QString::number(degats) + " degats !");
         }
 
         if (genimonEnnemi->getPV() <= 0) {
             genimonEnnemi->setPV(0);
             ui->HP2->setText("PV : 0 / " + QString::number(genimonEnnemi->pvMax));
-            ui->TableauInfo->setText("Bravo ! " + QString::fromStdString(genimonEnnemi->getNom()) + " est K.O. !");
+            ui->TableauInfo->setText("Bravo ! " + QString::fromStdString(genimonEnnemi->getNom()) + " est K.O. ! \nTu as gagne !");
             actionsJoueur.clear();
             attenteActions = false;
 
-            QTimer::singleShot(3000, this, [=]() {
+            QTimer::singleShot(4000, this, [=]() {
                 int ballesGagnees = 3 + (rand() % 5);//entre 3 et 7
                 *balles += ballesGagnees;
-                ui->TableauInfo->setText("Tu gagnes " + QString::number(ballesGagnees) + " balles !");
+                (*genimonJoueur).setPV(genimonJoueur->getPV());
+                ui->TableauInfo->setText("Tu gagnes " + QString::number(ballesGagnees) + " balles ! \n4 = retour a la map");
                 });
             return;
         }
 
-        ui->TableauInfo->setText(nomJoueur + " attaque et inflige " + QString::number(degats) + " degats !");
         ui->HP2->setText("PV : " + QString::number(genimonEnnemi->getPV()) + " / " + QString::number(genimonEnnemi->pvMax));
     }
 
@@ -457,13 +462,18 @@ void Combat::executerActionSuivante()
 
     indexActionJoueur++;
 
-    QTimer::singleShot(3000, this, [=]() {
+    QTimer::singleShot(4000, this, [=]() {
         executerActionSuivante();
         });
 }
 
 void Combat::initialiserCombat()
 {
+	if (genimonJoueur->getPV() == 0) {
+		ui->TableauInfo->setText(QString::fromStdString(genimonJoueur->getNom()) + " semble fatigue... \nPrend la fuite!");
+		return;
+	}
+
     //reset
     combatCommence = false;
     nbToursJoueur = 2;
@@ -485,21 +495,21 @@ void Combat::initialiserCombat()
     ui->TableauInfo->setText("Bon combat!");
 
     //2 sec pile ou face
-    QTimer::singleShot(3000, this, [=]() {
+    QTimer::singleShot(4000, this, [=]() {
         bool joueurCommence = (rand() % 2 == 0);//true = joueur gagne
         ui->TableauInfo->setText("Tirage a pile ou face...");
 
-        QTimer::singleShot(3000, this, [=]() {
+        QTimer::singleShot(4000, this, [=]() {
             if (joueurCommence) {
-                ui->TableauInfo->setText("Resultat : Tu commences !");
-                QTimer::singleShot(3000, this, [=]() {
-                    ui->TableauInfo->setText("A ton tour ! Tu as " + QString::number(nbToursJoueur) + " actions.");
+                ui->TableauInfo->setText("Resultat : " + QString::fromStdString(genimonJoueur->getNom()) + " commence !");
+                QTimer::singleShot(4000, this, [=]() {
+                    ui->TableauInfo->setText("A ton tour !\nTu as " + QString::number(nbToursJoueur) + " actions.");
                     combatCommence = true;
                     });
             }
             else {
-                ui->TableauInfo->setText("Resultat : ennemi commence !");
-                QTimer::singleShot(3000, this, [=]() {
+                ui->TableauInfo->setText("Resultat : " + QString::fromStdString(genimonEnnemi->getNom()) + " commence !");
+                QTimer::singleShot(4000, this, [=]() {
                     combatCommence = true;
                     gererCombatTourAdversaire();
                     });
