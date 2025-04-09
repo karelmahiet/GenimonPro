@@ -328,11 +328,6 @@ void Combat::gererCombatTourAdversaire()
                 combatTermine = true;
                 QTimer::singleShot(4000, this, [=]() {
                     ui->TableauInfo->setText(QString::fromStdString(genimonJoueur->getNom()) + " est K.O. ! (4 = map)");
-                    QTimer::singleShot(3000, this, [=]() {
-                        nbBon = 9;
-                        nbAtt = 9;
-                        nbBou = 9;
-                        emit requestMenuChange(2);});
                     });
                 return;
             }
@@ -393,11 +388,6 @@ void Combat::executerActionsJoueur()
         QTimer::singleShot(3000, this, [=]() {
             ui->TableauInfo->setText(QString::fromStdString(genimonEnnemi->getNom()) + " est K.O. ! (4 = map)");
             });
-        QTimer::singleShot(3000, this, [=]() {
-            nbBon = 9;
-            nbAtt = 9;
-            nbBou = 9;
-            emit requestMenuChange(2);});
     }else
     executerActionSuivante();
 }
@@ -448,11 +438,6 @@ void Combat::executerActionSuivante()
                 *balles += ballesGagnees;
                 ui->TableauInfo->setText("Tu gagnes " + QString::number(ballesGagnees) + " balles !");
                 });
-            QTimer::singleShot(3000, this, [=]() {
-                nbBon = 9;
-                nbAtt = 9;
-                nbBou = 9;
-                emit requestMenuChange(2);});
             return;
         }
 
