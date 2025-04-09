@@ -21,8 +21,9 @@ void Pause::handleKeyPress(int key) {
         QApplication::quit(); // Quitter
     }
     else if (key == Qt::Key_2) {
-        emit requestMenuChange(0); //Passer au menu main
         emit reinitialiserJeu();
+        emit requestMenuChange(0); //Passer au menu main
+        clearFocus();
     }
     else if (key == Qt::Key_3) {
         if (mode5a8Actif)
@@ -50,8 +51,9 @@ void Pause::handleArduinoInput(int boutons, int joystick, int accelerometre, int
         QApplication::quit(); // Quitter
     }
     else if (boutons == 2) {
-        emit requestMenuChange(0); //Passer au menu main
         emit reinitialiserJeu();
+        emit requestMenuChange(0); //Passer au menu main
+        clearFocus();
     }
     else if (boutons == 3) {
         if (mode5a8Actif)

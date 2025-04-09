@@ -27,7 +27,7 @@ private:
     void showListGenimon();
     void highlight();
 
-    int etat = 0; // 0 = listGenimon, 1 = Genimon
+    bool estListe = true;
     int selectionGenimon = 0; //0 a 7
     vector<Genimon>* genidex_trans;
 
