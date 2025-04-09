@@ -2,6 +2,7 @@
 #include "ui_combat.h"
 #include <QPixmap>
 #include <functional>
+#include "capture.h"
 
 Combat::Combat(QWidget* parent)
     : QWidget(parent)
@@ -11,6 +12,11 @@ Combat::Combat(QWidget* parent)
     ui->setupUi(this);
     connect(TransTimer, &QTimer::timeout, this, &Combat::combat);
     connect(this, &Combat::signalBonus, this, &Combat::btnBonus);
+	battleMusic = new QMediaPlayer(this);
+	battleOutput = new QAudioOutput(this);
+	battleMusic->setAudioOutput(battleOutput);
+	battleMusic->setSource(QUrl::fromLocalFile("battle.wav"));
+	battleMusic->setLoops(QMediaPlayer::Infinite);
 
 }
 
@@ -99,6 +105,7 @@ void Combat::update() {
         JOYSTICKS = 0;
         ACCEL = 0;
         MUONS = 0;
+		battleMusic->stop();
         emit requestMenuChange(2); //Passer au menu map
     }
     if (BOUTONS == 1) {
@@ -128,7 +135,7 @@ void Combat::showEvent(QShowEvent* event) {
 }
 
 void Combat::transition() {
-
+    battleMusic->play();
     ui->BackGround->setPixmap(QPixmap(":/Decor/Image_Qt/Decor/Transition combat.png"));
     ui->Genimon1->move(570, 130);
     ui->Genimon2->move(570, 460);

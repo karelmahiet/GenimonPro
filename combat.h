@@ -5,6 +5,8 @@
 #include <QTimer>
 #include <QProgressBar>
 #include "genimon.h"
+#include <QMediaPlayer>
+#include <QAudioOutput>
 
 namespace Ui {
     class Combat;
@@ -39,6 +41,8 @@ private:
     int indexActionJoueur = 0;
     Genimon* genimonJoueur;
     Genimon* genimonEnnemi;
+    QMediaPlayer* battleMusic;
+    QAudioOutput* battleOutput;
     std::vector<Genimon>* genidexDuJoueur;
     std::vector<int> actionsJoueur;
     bool attenteActions = false;
