@@ -1,0 +1,488 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="Form Files">
+      <UniqueIdentifier>{99349809-55BA-4b9d-BF79-8FDBB0286EB3}</UniqueIdentifier>
+      <Extensions>ui</Extensions>
+      <ParseFiles>false</ParseFiles>
+    </Filter>
+    <Filter Include="Form Files">
+      <UniqueIdentifier>{99349809-55BA-4b9d-BF79-8FDBB0286EB3}</UniqueIdentifier>
+      <Extensions>ui</Extensions>
+      <ParseFiles>false</ParseFiles>
+    </Filter>
+    <Filter Include="Generated Files">
+      <UniqueIdentifier>{71ED8ED8-ACB9-4CE9-BBE1-E00B30144E11}</UniqueIdentifier>
+      <Extensions>cpp;c;cxx;moc;h;def;odl;idl;res;</Extensions>
+    </Filter>
+    <Filter Include="Generated Files">
+      <UniqueIdentifier>{71ED8ED8-ACB9-4CE9-BBE1-E00B30144E11}</UniqueIdentifier>
+      <Extensions>cpp;c;cxx;moc;h;def;odl;idl;res;</Extensions>
+    </Filter>
+    <Filter Include="Header Files">
+      <UniqueIdentifier>{93995380-89BD-4b04-88EB-625FBE52EBFB}</UniqueIdentifier>
+      <Extensions>h;hpp;hxx;hm;inl;inc;xsd</Extensions>
+    </Filter>
+    <Filter Include="Header Files">
+      <UniqueIdentifier>{93995380-89BD-4b04-88EB-625FBE52EBFB}</UniqueIdentifier>
+      <Extensions>h;hpp;hxx;hm;inl;inc;xsd</Extensions>
+    </Filter>
+    <Filter Include="Resource Files">
+      <UniqueIdentifier>{D9D6E242-F8AF-46E4-B9FD-80ECBC20BA3E}</UniqueIdentifier>
+      <Extensions>qrc;*</Extensions>
+      <ParseFiles>false</ParseFiles>
+    </Filter>
+    <Filter Include="Resource Files">
+      <UniqueIdentifier>{D9D6E242-F8AF-46E4-B9FD-80ECBC20BA3E}</UniqueIdentifier>
+      <Extensions>qrc;*</Extensions>
+      <ParseFiles>false</ParseFiles>
+    </Filter>
+    <Filter Include="Source Files">
+      <UniqueIdentifier>{4FC737F1-C7A5-4376-A066-2A32D752A2FF}</UniqueIdentifier>
+      <Extensions>cpp;c;cxx;def;odl;idl;hpj;bat;asm;asmx</Extensions>
+    </Filter>
+    <Filter Include="Source Files">
+      <UniqueIdentifier>{4FC737F1-C7A5-4376-A066-2A32D752A2FF}</UniqueIdentifier>
+      <Extensions>cpp;c;cxx;def;odl;idl;hpj;bat;asm;asmx</Extensions>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="capture.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="choixaction.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="choixjoueur.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="combat.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="commande.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="controle.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="genidex.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="genimon.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="historencontre.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="main.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="mainmenu.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="map.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="pause.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="regle.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="SerialPort.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <CustomBuild Include="capture.h">
+      <Filter>Header Files</Filter>
+    </CustomBuild>
+    <CustomBuild Include="choixaction.h">
+      <Filter>Header Files</Filter>
+    </CustomBuild>
+    <CustomBuild Include="choixjoueur.h">
+      <Filter>Header Files</Filter>
+    </CustomBuild>
+    <CustomBuild Include="combat.h">
+      <Filter>Header Files</Filter>
+    </CustomBuild>
+    <CustomBuild Include="commande.h">
+      <Filter>Header Files</Filter>
+    </CustomBuild>
+    <CustomBuild Include="controle.h">
+      <Filter>Header Files</Filter>
+    </CustomBuild>
+    <CustomBuild Include="genidex.h">
+      <Filter>Header Files</Filter>
+    </CustomBuild>
+    <CustomBuild Include="genimon.h">
+      <Filter>Header Files</Filter>
+    </CustomBuild>
+    <CustomBuild Include="historencontre.h">
+      <Filter>Header Files</Filter>
+    </CustomBuild>
+    <ClInclude Include="json.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <CustomBuild Include="mainmenu.h">
+      <Filter>Header Files</Filter>
+    </CustomBuild>
+    <CustomBuild Include="map.h">
+      <Filter>Header Files</Filter>
+    </CustomBuild>
+    <CustomBuild Include="pause.h">
+      <Filter>Header Files</Filter>
+    </CustomBuild>
+    <CustomBuild Include="regle.h">
+      <Filter>Header Files</Filter>
+    </CustomBuild>
+    <ClInclude Include="unistd.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="debug\moc_capture.cpp">
+      <Filter>Generated Files</Filter>
+    </ClCompile>
+    <ClCompile Include="release\moc_capture.cpp">
+      <Filter>Generated Files</Filter>
+    </ClCompile>
+    <ClCompile Include="debug\moc_choixaction.cpp">
+      <Filter>Generated Files</Filter>
+    </ClCompile>
+    <ClCompile Include="release\moc_choixaction.cpp">
+      <Filter>Generated Files</Filter>
+    </ClCompile>
+    <ClCompile Include="debug\moc_choixjoueur.cpp">
+      <Filter>Generated Files</Filter>
+    </ClCompile>
+    <ClCompile Include="release\moc_choixjoueur.cpp">
+      <Filter>Generated Files</Filter>
+    </ClCompile>
+    <ClCompile Include="debug\moc_combat.cpp">
+      <Filter>Generated Files</Filter>
+    </ClCompile>
+    <ClCompile Include="release\moc_combat.cpp">
+      <Filter>Generated Files</Filter>
+    </ClCompile>
+    <ClCompile Include="debug\moc_commande.cpp">
+      <Filter>Generated Files</Filter>
+    </ClCompile>
+    <ClCompile Include="release\moc_commande.cpp">
+      <Filter>Generated Files</Filter>
+    </ClCompile>
+    <ClCompile Include="debug\moc_controle.cpp">
+      <Filter>Generated Files</Filter>
+    </ClCompile>
+    <ClCompile Include="release\moc_controle.cpp">
+      <Filter>Generated Files</Filter>
+    </ClCompile>
+    <ClCompile Include="debug\moc_genidex.cpp">
+      <Filter>Generated Files</Filter>
+    </ClCompile>
+    <ClCompile Include="release\moc_genidex.cpp">
+      <Filter>Generated Files</Filter>
+    </ClCompile>
+    <ClCompile Include="debug\moc_genimon.cpp">
+      <Filter>Generated Files</Filter>
+    </ClCompile>
+    <ClCompile Include="release\moc_genimon.cpp">
+      <Filter>Generated Files</Filter>
+    </ClCompile>
+    <ClCompile Include="debug\moc_historencontre.cpp">
+      <Filter>Generated Files</Filter>
+    </ClCompile>
+    <ClCompile Include="release\moc_historencontre.cpp">
+      <Filter>Generated Files</Filter>
+    </ClCompile>
+    <ClCompile Include="debug\moc_mainmenu.cpp">
+      <Filter>Generated Files</Filter>
+    </ClCompile>
+    <ClCompile Include="release\moc_mainmenu.cpp">
+      <Filter>Generated Files</Filter>
+    </ClCompile>
+    <ClCompile Include="debug\moc_map.cpp">
+      <Filter>Generated Files</Filter>
+    </ClCompile>
+    <ClCompile Include="release\moc_map.cpp">
+      <Filter>Generated Files</Filter>
+    </ClCompile>
+    <ClCompile Include="debug\moc_pause.cpp">
+      <Filter>Generated Files</Filter>
+    </ClCompile>
+    <ClCompile Include="release\moc_pause.cpp">
+      <Filter>Generated Files</Filter>
+    </ClCompile>
+    <CustomBuild Include="debug\moc_predefs.h.cbt">
+      <Filter>Generated Files</Filter>
+    </CustomBuild>
+    <CustomBuild Include="release\moc_predefs.h.cbt">
+      <Filter>Generated Files</Filter>
+    </CustomBuild>
+    <ClCompile Include="debug\moc_regle.cpp">
+      <Filter>Generated Files</Filter>
+    </ClCompile>
+    <ClCompile Include="release\moc_regle.cpp">
+      <Filter>Generated Files</Filter>
+    </ClCompile>
+    <ClCompile Include="debug\qrc_Image.cpp">
+      <Filter>Generated Files</Filter>
+    </ClCompile>
+    <ClCompile Include="release\qrc_Image.cpp">
+      <Filter>Generated Files</Filter>
+    </ClCompile>
+    <ClCompile Include="debug\qrc_Music.cpp">
+      <Filter>Generated Files</Filter>
+    </ClCompile>
+    <ClCompile Include="release\qrc_Music.cpp">
+      <Filter>Generated Files</Filter>
+    </ClCompile>
+    <ClInclude Include="ui_capture.h">
+      <Filter>Generated Files</Filter>
+    </ClInclude>
+    <ClInclude Include="ui_choixaction.h">
+      <Filter>Generated Files</Filter>
+    </ClInclude>
+    <ClInclude Include="ui_choixjoueur.h">
+      <Filter>Generated Files</Filter>
+    </ClInclude>
+    <ClInclude Include="ui_combat.h">
+      <Filter>Generated Files</Filter>
+    </ClInclude>
+    <ClInclude Include="ui_commande.h">
+      <Filter>Generated Files</Filter>
+    </ClInclude>
+    <ClInclude Include="ui_controle.h">
+      <Filter>Generated Files</Filter>
+    </ClInclude>
+    <ClInclude Include="ui_genidex.h">
+      <Filter>Generated Files</Filter>
+    </ClInclude>
+    <ClInclude Include="ui_historencontre.h">
+      <Filter>Generated Files</Filter>
+    </ClInclude>
+    <ClInclude Include="ui_mainmenu.h">
+      <Filter>Generated Files</Filter>
+    </ClInclude>
+    <ClInclude Include="ui_map.h">
+      <Filter>Generated Files</Filter>
+    </ClInclude>
+    <ClInclude Include="ui_pause.h">
+      <Filter>Generated Files</Filter>
+    </ClInclude>
+    <ClInclude Include="ui_regle.h">
+      <Filter>Generated Files</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <CustomBuild Include="capture.ui">
+      <Filter>Form Files</Filter>
+    </CustomBuild>
+    <CustomBuild Include="choixaction.ui">
+      <Filter>Form Files</Filter>
+    </CustomBuild>
+    <CustomBuild Include="choixjoueur.ui">
+      <Filter>Form Files</Filter>
+    </CustomBuild>
+    <CustomBuild Include="combat.ui">
+      <Filter>Form Files</Filter>
+    </CustomBuild>
+    <CustomBuild Include="commande.ui">
+      <Filter>Form Files</Filter>
+    </CustomBuild>
+    <CustomBuild Include="controle.ui">
+      <Filter>Form Files</Filter>
+    </CustomBuild>
+    <CustomBuild Include="genidex.ui">
+      <Filter>Form Files</Filter>
+    </CustomBuild>
+    <CustomBuild Include="historencontre.ui">
+      <Filter>Form Files</Filter>
+    </CustomBuild>
+    <CustomBuild Include="mainmenu.ui">
+      <Filter>Form Files</Filter>
+    </CustomBuild>
+    <CustomBuild Include="map.ui">
+      <Filter>Form Files</Filter>
+    </CustomBuild>
+    <CustomBuild Include="pause.ui">
+      <Filter>Form Files</Filter>
+    </CustomBuild>
+    <CustomBuild Include="regle.ui">
+      <Filter>Form Files</Filter>
+    </CustomBuild>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Image_Qt\Civil\Abdullah_final.png">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="Image_Qt\Decor\AreneCombat.png">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="Image_Qt\Decor\Attack.png">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="Image_Qt\Music\Blitzkrieg 2022.wav">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="Image_Qt\Music\Blitzkrieg_Int.wav">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="Image_Qt\Starter\Bombardier Batiment.png">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="Image_Qt\Starter\Bombardier Bio.png">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="Image_Qt\Starter\Bombardier Chimique.png">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="Image_Qt\Starter\Bombardier Civil.png">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="Image_Qt\Starter\Bombardier Elec.png">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="Image_Qt\Starter\Bombardier Info.png">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="Image_Qt\Starter\Bombardier Mec.png">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="Image_Qt\Starter\Bombardier Robot.png">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="Image_Qt\Decor\Bonus.png">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="Image_Qt\Decor\Cafeteria.jpeg">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="Image_Qt\Decor\Cafeteria_5a8.jpeg">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="Image_Qt\Civil\Catherine_final.png">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="Image_Qt\Decor\ChatGPT.png">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="Image_Qt\Decor\Ciel_menu.jpg">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="Image_Qt\Decor\Coeur.png">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="Image_Qt\Elec\Emy_finale-removebg-preview.png">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="Image_Qt\Chimique\Erlenmeyer-Jacob.png">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="Image_Qt\Chimique\Erlenmeyer-Karel.png">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="Image_Qt\Chimique\Erlenmeyer-Marie.png">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="Image_Qt\Batiment\Felix_Finale.png">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="Image_Qt\Music\Final Fantasy VII Medley.mp3">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="Image_Qt\Elec\Flo_finale-removebg-preview.png">
+      <Filter>Resource Files</Filter>
+    </None>
+    <CustomBuild Include="Image.qrc">
+      <Filter>Resource Files</Filter>
+    </CustomBuild>
+    <None Include="Image_Qt\Elec\JP_finale-removebg-preview.png">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="Image_Qt\Decor\Livre2D.png">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="Image_Qt\Decor\Livre2D_V2.png">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="Image_Qt\Elec\Marc-Antoine_finale-removebg-preview.png">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="Image_Qt\Civil\Marek_final.png">
+      <Filter>Resource Files</Filter>
+    </None>
+    <CustomBuild Include="Music.qrc">
+      <Filter>Resource Files</Filter>
+    </CustomBuild>
+    <None Include="Image_Qt\Decor\Paysage.png">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="Image_Qt\Decor\School-Map-8bit.png">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="Image_Qt\Decor\School-Map-8bit_5a8.png">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="Image_Qt\Decor\School-Map-withoutPeople-8bit.jpeg">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="Image_Qt\Decor\Shield.png">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="Image_Qt\Decor\Transition combat.png">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="Image_Qt\Civil\Trudeau_final.png">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="Image_Qt\Batiment\Trump_Finale.png">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="Image_Qt\Batiment\Vincent_Finale.png">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="Image_Qt\Bio\Virus_Darnley-removebg-preview.png">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="Image_Qt\Bio\Virus_MrClean-removebg-preview.png">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="Image_Qt\Bio\Virus_Simon-removebg-preview.png">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="Image_Qt\Info\ecran_Albert.png">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="Image_Qt\Info\ecran_JeremieV2.png">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="Image_Qt\Info\ecran_RaphaelV2.png">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="Image_Qt\Mec\gear_Dylan.png">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="Image_Qt\Mec\gear_Joe.png">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="Image_Qt\Mec\gear_Luther.png">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="Image_Qt\Decor\pokeball1.png">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="Image_Qt\Robot\robot_Alexis.png">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="Image_Qt\Robot\robot_Elon.png">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="Image_Qt\Robot\robot_Melianne.png">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="Image_Qt\Robot\robot_Youssef.png">
+      <Filter>Resource Files</Filter>
+    </None>
+  </ItemGroup>
+</Project>
