@@ -53,7 +53,10 @@ private:
     int nbBoucliersAdversaire = 0;
     int nbBonusAdversaire = 0;
 
+	bool bouclierJoueurActif = false;
+	bool bouclierEnnemiActif = false;
     bool tourAdversaireEnCours = false;
+	bool combatTermine = false;
     int bonusGagnesCeTour = 0;
 
     bool defenseActive;
