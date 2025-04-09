@@ -83,27 +83,27 @@ void Genidex::handleArduinoInput(int boutons, int joystick, int accelerometre, i
 }
 
 void Genidex::update() {
-    if (BOUTONS == 1 && etat == 0)
+    if (BOUTONS == 1 && estListe)
     {
-        etat = 1;
+        estListe = false;
         showGenimon();
     }
-    else if (BOUTONS == 2 && etat == 0)
+    else if (BOUTONS == 1 && !estListe)
     {
         //Guerir genimon
     }
-    else if (BOUTONS == 3 && etat == 1)
-    {
-        etat = 0;
-        showListGenimon();
-    }
-    else if (BOUTONS == 4 && etat == 0)
+    else if (BOUTONS == 4 && estListe)
     {
         BOUTONS = 0;
         JOYSTICKS = 0;
         ACCEL = 0;
         MUONS = 0;
         emit requestMenuChange(2); //Passer au menu Map
+    }
+    else if (BOUTONS == 4 && !estListe)
+    {
+        estListe = true;
+        showListGenimon();
     }
 
     if (JOYSTICKS == 1 && selectionGenimon > 3)
@@ -136,10 +136,20 @@ void Genidex::update() {
 void Genidex::setGenidex(int* nbBalles, int* nbCapsuleGuerison, vector<Genimon>* genidex)
 {
     genidex_trans = genidex;
-    ui->Info1->setText("Nombre de balle: " + QString().append((to_string(*nbBalles))));
-    ui->Info2->setText("Nombre de capsule de guerison: " + QString().append((to_string(*nbCapsuleGuerison))));
+    ui->Info1->setText("Nombre de balles: " + QString().append((to_string(*nbBalles))));
+    ui->Info2->setText("Nombre de capsules de guerison: " + QString().append((to_string(*nbCapsuleGuerison))));
     showListGenimon();
     highlight();
+    estListe = true;
+
+    if (*nbCapsuleGuerison > 0)
+    {
+        ui->Info2->setStyleSheet("background-color: white;");
+    }
+    else
+    {
+        ui->Info2->setStyleSheet("background-color: grey;");
+    }
 }
 
 
@@ -171,7 +181,7 @@ void Genidex::showGenimon()
 
 
     ui->Genimon->setPixmap((*genidex_trans)[selectionGenimon].imageGenimon.scaled(ui->Genimon->size(), Qt::KeepAspectRatio, Qt::SmoothTransformation));
-    ui->Description->setText("Nom: " + QString().append((*genidex_trans)[selectionGenimon].getNom()));
+    ui->Description->setText(QString().append("Nom: " + (*genidex_trans)[selectionGenimon].getNom()));
 }
 
 void Genidex::showListGenimon()

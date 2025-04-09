@@ -117,7 +117,7 @@ void Capture::afficherInfoCapture(Genimon genimonEnCours, int* nbBalles, int* nb
     captureBloquee = false;
     ui->Info1->setStyleSheet("background-color: white;");
     ui->Genimon->setPixmap(genimonEnCours.imageGenimon.scaled(ui->Genimon->size(), Qt::KeepAspectRatio, Qt::SmoothTransformation));
-    QString texte = "Nombre de balle: ";
+    QString texte = "Nombre de balles: ";
     texte.append(to_string(*nbBalles));
     ui->Info1->setText(texte);
     ui->Resultat->setText("Resultat: En attente...");
@@ -149,7 +149,7 @@ int Capture::compterRebond()
         }
     }
 
-    QString texte = "Nombre de balle: ";
+    QString texte = "Nombre de balles: ";
     texte.append(to_string(*nbBalles_trans));
     ui->Info1->setText(texte);
     if (*nbBalles_trans <= 0)

@@ -10,7 +10,6 @@
 #include <QDebug>
 
 
-
 Controle::Controle(QWidget* parent)
     : QMainWindow(parent)
     , ui(new Ui::Controle)
@@ -163,7 +162,13 @@ void Controle::keyPressEvent(QKeyEvent* event) {
     }
 }
 
-void Controle::changeMenu(int index) {
+void Controle::changeMenu(int index)
+{
+    JOYSTICK = 0;
+    BOUTTONS = 0;
+    ACCELEROMETRE = 0;
+    MUONS = 0;
+
     if (index >= 0 && index < stackedWidget->count()) {
         stackedWidget->setCurrentIndex(index);
     }
@@ -361,7 +366,7 @@ void Controle::RcvFromSerial() {
             // Traitement du message JSON
             if (doc.isObject()) {
                 jsonObject = doc.object();
-                qDebug() << "Données reçues:" << jsonObject;
+                //qDebug() << "Données reçues:" << jsonObject;
                 // Traitement des données JSON ici
             }
         }
@@ -385,7 +390,35 @@ void Controle::RcvFromSerial() {
         MUONS = jsonObject["muons"].toInt();
     }
 
-    emit sendManetteInput(BOUTTONS, JOYSTICK, ACCELEROMETRE, MUONS);
+    if (stackedWidget->currentIndex() == 0) // Menu Main
+    {
+        switch (BOUTTONS) {
+        case 1:
+            changeMenu(1); // Aller à ChoixJoueur
+            break;
+        case 2:
+            changeMenu(7); // Aller à Commande
+            break;
+        case 3:
+            changeMenu(8); // Aller à Regle
+            break;
+        case 4:
+            QApplication::quit(); // Quitter
+            break;
+        default:
+            break;
+        }
+    }
+
+    if (envoi)
+    {
+        emit sendManetteInput(BOUTTONS, JOYSTICK, ACCELEROMETRE, MUONS);
+        envoi = false;
+    }
+    else
+    {
+        envoi = true;
+    }
 }
 
 
@@ -401,7 +434,7 @@ void Controle::SendToSerial(const QString& message, int segment) {
         }
         else if (lastSend == 1) {
             jsonObject["nbSeg"] = segment;
-            lastSend = 0;
+            lastSend = 1;
         }
 
 
@@ -416,7 +449,7 @@ void Controle::SendToSerial(const QString& message, int segment) {
         // Envoyer le message JSON via le port série
         if (serialPort->isOpen()) {
             serialPort->write(jsonData);
-            qDebug() << "Message envoyé à l'Arduino:" << QString::fromUtf8(jsonData).simplified();
+            //qDebug() << "Message envoyé à l'Arduino:" << QString::fromUtf8(jsonData).simplified();
         }
         else {
             qDebug() << "Erreur : Port série non ouvert.";
@@ -428,7 +461,6 @@ void Controle::SendToSerial(const QString& message, int segment) {
     }
 
 }
-
 
 
 void Controle::setSegment(int seg)

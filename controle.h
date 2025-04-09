@@ -69,6 +69,7 @@ private:
     QString MESSAGE = "Je communique";
     int SEGMENT = 0;
     bool lastSend = 0;
+    bool envoi = true;
 
 signals:
     void sendKeyPress(int key); // Signal pour envoyer les touches clavier
