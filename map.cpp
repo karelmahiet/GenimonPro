@@ -129,12 +129,12 @@ void Map::initialiserMap()
 
     outsideOutput = new QAudioOutput(this);
     outsideMusic = new QMediaPlayer(this);
-    outsideMusic->setSource(QUrl("qrc:/Music/Image_Qt/Music/Blitzkrieg 2022.wav"));
+    outsideMusic->setSource(QUrl::fromLocalFile("Blitzkrieg 2022.wav"));
     outsideMusic->setAudioOutput(outsideOutput);
     outsideMusic->setLoops(QMediaPlayer::Infinite);
     insideOutput = new QAudioOutput(this);
     insideMusic = new QMediaPlayer(this);
-    insideMusic->setSource(QUrl("qrc:/Music/Image_Qt/Music/Blitzkrieg_Int.wav"));
+    insideMusic->setSource(QUrl::fromLocalFile("Blitzkrieg_Int.wav"));
     insideMusic->setAudioOutput(insideOutput);
     insideMusic->setLoops(QMediaPlayer::Infinite);
 }
@@ -314,6 +314,8 @@ void Map::update() {
         if ((listeGenimons[i]->position_x - 4 == position_x || listeGenimons[i]->position_x - 5 == position_x)
             && (listeGenimons[i]->position_y - 1 == position_y || listeGenimons[i]->position_y - 2 == position_y))
         {
+			insideMusic->pause();
+			outsideMusic->pause();
             historique.push_back(*listeGenimons[i]);
             emit sendInfos(*listeGenimons[i], &nbBalles, &nbCapsuleGuerison, &genidex);
 
@@ -375,7 +377,7 @@ void Map::gererCapsuleVieMap()
 {
     if (!capsuleGuerisonActive && nbCapsuleGuerison < maxCapsuleGuerison)
     {
-        int choix = rand() % 4;
+        int choix = rand() % 3;
         if (choix == 0)
         {
             capsuleGuerison->show();

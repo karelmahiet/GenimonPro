@@ -11,6 +11,27 @@ Capture::Capture(QWidget* parent)
     ui->Joueur->setPixmap(QPixmap(":/Decor/Image_Qt/Decor/ChatGPT.png").scaled(520, 470, Qt::KeepAspectRatio, Qt::SmoothTransformation));
     ui->Pokeball->setVisible(false);
     captureBloquee = false;
+	CatchPlayer = new QMediaPlayer(this);
+	CatchOutput = new QAudioOutput(this);
+	CatchPlayer->setAudioOutput(CatchOutput);
+	CatchPlayer->setSource(QUrl::fromLocalFile("Catch.wav"));
+	WobblePlayer = new QMediaPlayer(this);
+	WobbleOutput = new QAudioOutput(this);
+	WobblePlayer->setAudioOutput(WobbleOutput);
+	WobblePlayer->setSource(QUrl::fromLocalFile("Wobble.wav"));
+	EscapePlayer = new QMediaPlayer(this);
+	EscapeOutput = new QAudioOutput(this);
+	EscapePlayer->setAudioOutput(EscapeOutput);
+	EscapePlayer->setSource(QUrl::fromLocalFile("Escape.wav"));
+	ThrowPlayer = new QMediaPlayer(this);
+	ThrowOutput = new QAudioOutput(this);
+	ThrowPlayer->setAudioOutput(ThrowOutput);
+	ThrowPlayer->setSource(QUrl::fromLocalFile("Throw.wav"));
+	battleMusic = new QMediaPlayer(this);
+	battleOutput = new QAudioOutput(this);
+	battleMusic->setAudioOutput(battleOutput);
+	battleMusic->setSource(QUrl::fromLocalFile("battle.wav"));
+    battleMusic->setLoops(QMediaPlayer::Infinite);
 }
 
 Capture::~Capture()
@@ -93,6 +114,7 @@ void Capture::update() {
         {
             int nbRebond = compterRebond();
             animerPokeball(nbRebond);
+            battleMusic->play();
         }
     }
     else if (BOUTONS == 2) {
@@ -101,6 +123,7 @@ void Capture::update() {
         ACCEL = 0;
         MUONS = 0;
         emit requestMenuChange(2); //Passer au menu map
+		battleMusic->stop();
         clearFocus();
     }
 
@@ -117,7 +140,7 @@ void Capture::afficherInfoCapture(Genimon genimonEnCours, int* nbBalles, int* nb
     captureBloquee = false;
     ui->Info1->setStyleSheet("background-color: white;");
     ui->Genimon->setPixmap(genimonEnCours.imageGenimon.scaled(ui->Genimon->size(), Qt::KeepAspectRatio, Qt::SmoothTransformation));
-    QString texte = "Nombre de balle: ";
+    QString texte = "Nombre de balles: ";
     texte.append(to_string(*nbBalles));
     ui->Info1->setText(texte);
     ui->Resultat->setText("Resultat: En attente...");
@@ -149,7 +172,7 @@ int Capture::compterRebond()
         }
     }
 
-    QString texte = "Nombre de balle: ";
+    QString texte = "Nombre de balles: ";
     texte.append(to_string(*nbBalles_trans));
     ui->Info1->setText(texte);
     if (*nbBalles_trans <= 0)
@@ -176,16 +199,31 @@ void Capture::animerPokeball(int nbRebond) {
     animationL->setEasingCurve(QEasingCurve::OutQuad); // Courbe d'accélération de type "rebond"
 
     animationL->start();
+	ThrowPlayer->play();
 
     // Timer pour faire disparaître la Pokéball après l'animation
     connect(animationL, &QPropertyAnimation::finished, this, [=]() {
         animationL->deleteLater();  // Supprimer l'animation après qu'elle soit terminée
         ui->Genimon->hide();
         animationGroup->start();
+        // Ajouter un délai pour jouer le son après la neuvième secousse
+        QTimer::singleShot(1000, this, [=]() {
+            WobblePlayer->play();
+            });
+        if (nbRebond >= 2) {
+            // Ajouter un délai pour jouer le son après la neuvième secousse
+            QTimer::singleShot(2500, this, [=]() {
+                WobblePlayer->play();
+                });
+        }
+        if (nbRebond >= 3) {
+            // Ajouter un délai pour jouer le son après la neuvième secousse
+            QTimer::singleShot(4000, this, [=]() {
+                WobblePlayer->play();
+                });
+        }
+
         });
-
-
-
     //------------Animation de capture--------------
     // Créer un QPropertyAnimation pour animer la position
     QPropertyAnimation* shakeAnim = new QPropertyAnimation(ui->Pokeball, "pos");
@@ -282,9 +320,12 @@ void Capture::animerPokeball(int nbRebond) {
     }
 
     connect(animationGroup, &QPropertyAnimation::finished, this, [=]() {
+
         animationGroup->deleteLater();  // Supprimer l'animation après qu'elle soit terminée
+
         if (nbRebond != 4)
         {
+            EscapePlayer->play();
             ui->Pokeball->setVisible(false);
             ui->Genimon->show();
             ui->Resultat->setText("Resultat: Capture echoue");
@@ -292,10 +333,12 @@ void Capture::animerPokeball(int nbRebond) {
         }
         else
         {
+			CatchPlayer->play();
             genidex_trans->push_back(genimonEnCours_trans[0]);
             ui->Resultat->setText("Resultat: Capture reussie!");
             ui->Info1->setStyleSheet("background-color: grey;");
             animationA->start();
+			battleMusic->stop();
         }
         });
 }

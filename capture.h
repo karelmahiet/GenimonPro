@@ -5,6 +5,8 @@
 #include <QPropertyAnimation>
 #include <QSequentialAnimationGroup>
 #include <QTimer>
+#include <QMediaPlayer>
+#include <QAudioOutput>
 #include "genimon.h"
 
 namespace Ui {
@@ -30,6 +32,16 @@ private:
     int* nbBalles_trans;
     vector<Genimon>* genidex_trans;
     bool captureBloquee;
+	QMediaPlayer* CatchPlayer;
+	QAudioOutput* CatchOutput;
+	QMediaPlayer* WobblePlayer;
+	QAudioOutput* WobbleOutput;
+	QMediaPlayer* EscapePlayer;
+	QAudioOutput* EscapeOutput;
+	QMediaPlayer* ThrowPlayer;
+	QAudioOutput* ThrowOutput;
+    QMediaPlayer* battleMusic;
+    QAudioOutput* battleOutput;
 
     void animerPokeball(int nbRebond);
     int compterRebond();

@@ -13,7 +13,7 @@
   <property name="windowTitle">
    <string>Form</string>
   </property>
-  <widget class="QLabel" name="Genimon6">
+  <widget class="QLabel" name="Genimon4">
    <property name="geometry">
     <rect>
      <x>380</x>
@@ -38,7 +38,7 @@
     <string/>
    </property>
   </widget>
-  <widget class="QLabel" name="Genimon5">
+  <widget class="QLabel" name="Genimon2">
    <property name="geometry">
     <rect>
      <x>120</x>
@@ -104,7 +104,7 @@
     <string>Nom :</string>
    </property>
   </widget>
-  <widget class="QLabel" name="Genimon7">
+  <widget class="QLabel" name="Genimon6">
    <property name="geometry">
     <rect>
      <x>700</x>
@@ -129,7 +129,7 @@
     <string/>
    </property>
   </widget>
-  <widget class="QLabel" name="Genimon4">
+  <widget class="QLabel" name="Genimon7">
    <property name="geometry">
     <rect>
      <x>960</x>
@@ -217,7 +217,7 @@
     <string/>
    </property>
   </widget>
-  <widget class="QLabel" name="Genimon2">
+  <widget class="QLabel" name="Genimon3">
    <property name="geometry">
     <rect>
      <x>380</x>
@@ -305,7 +305,7 @@
     <string>Nom :</string>
    </property>
   </widget>
-  <widget class="QLabel" name="Genimon3">
+  <widget class="QLabel" name="Genimon5">
    <property name="geometry">
     <rect>
      <x>700</x>
@@ -549,20 +549,42 @@
     <set>Qt::AlignmentFlag::AlignCenter</set>
    </property>
   </widget>
+  <widget class="QLabel" name="Alerte">
+   <property name="geometry">
+    <rect>
+     <x>260</x>
+     <y>550</y>
+     <width>201</width>
+     <height>41</height>
+    </rect>
+   </property>
+   <property name="font">
+    <font>
+     <pointsize>14</pointsize>
+     <bold>true</bold>
+    </font>
+   </property>
+   <property name="text">
+    <string>Guerison impossible!</string>
+   </property>
+   <property name="alignment">
+    <set>Qt::AlignmentFlag::AlignCenter</set>
+   </property>
+  </widget>
   <zorder>BackGround</zorder>
-  <zorder>Genimon6</zorder>
-  <zorder>Genimon5</zorder>
-  <zorder>Nom1</zorder>
-  <zorder>Genimon7</zorder>
   <zorder>Genimon4</zorder>
+  <zorder>Genimon2</zorder>
+  <zorder>Nom1</zorder>
+  <zorder>Genimon6</zorder>
+  <zorder>Genimon7</zorder>
   <zorder>Nom8</zorder>
   <zorder>Nom2</zorder>
   <zorder>Genimon</zorder>
-  <zorder>Genimon2</zorder>
+  <zorder>Genimon3</zorder>
   <zorder>Nom3</zorder>
   <zorder>Genimon1</zorder>
   <zorder>Nom7</zorder>
-  <zorder>Genimon3</zorder>
+  <zorder>Genimon5</zorder>
   <zorder>Description</zorder>
   <zorder>Genimon8</zorder>
   <zorder>Nom4</zorder>
@@ -572,6 +594,7 @@
   <zorder>Info1</zorder>
   <zorder>Info2</zorder>
   <zorder>Contoles2</zorder>
+  <zorder>Alerte</zorder>
  </widget>
  <resources>
   <include location="Image.qrc"/>
