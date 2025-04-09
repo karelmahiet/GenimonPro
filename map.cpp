@@ -375,7 +375,7 @@ void Map::gererCapsuleVieMap()
 {
     if (!capsuleGuerisonActive && nbCapsuleGuerison < maxCapsuleGuerison)
     {
-        int choix = rand() % 4;
+        int choix = rand() % 3;
         if (choix == 0)
         {
             capsuleGuerison->show();

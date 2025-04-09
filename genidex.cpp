@@ -106,24 +106,24 @@ void Genidex::update() {
         showListGenimon();
     }
 
-    if (JOYSTICKS == 1 && selectionGenimon > 3)
+    if (JOYSTICKS == 1 && selectionGenimon > 0)
     {
-        selectionGenimon = selectionGenimon - 4;
+        selectionGenimon -= 1;
         highlight();
     }
-    else if (JOYSTICKS == 3 && selectionGenimon < 4)
+    else if (JOYSTICKS == 3 && selectionGenimon < 7)
     {
-        selectionGenimon = selectionGenimon + 4;
+        selectionGenimon += 1;
         highlight();
     }
-    else if (JOYSTICKS == 4 && selectionGenimon > 0 && selectionGenimon <= 7)
+    else if (JOYSTICKS == 4 && selectionGenimon >= 2)
     {
-        selectionGenimon--;
+        selectionGenimon -= 2;
         highlight();
     }
-    else if (JOYSTICKS == 2 && selectionGenimon >= 0 && selectionGenimon < 7)
+    else if (JOYSTICKS == 2 && selectionGenimon <= 5)
     {
-        selectionGenimon++;
+        selectionGenimon += 2;
         highlight();
     }
 
@@ -138,9 +138,10 @@ void Genidex::setGenidex(int* nbBalles, int* nbCapsuleGuerison, vector<Genimon>*
     genidex_trans = genidex;
     ui->Info1->setText("Nombre de balles: " + QString().append((to_string(*nbBalles))));
     ui->Info2->setText("Nombre de capsules de guerison: " + QString().append((to_string(*nbCapsuleGuerison))));
+    selectionGenimon = 0;
+    estListe = true;
     showListGenimon();
     highlight();
-    estListe = true;
 
     if (*nbCapsuleGuerison > 0)
     {
@@ -191,6 +192,7 @@ void Genidex::showListGenimon()
     ui->Contoles2->setVisible(false);
 
     ui->Contoles1->setVisible(true);
+    ui->Alerte->setVisible(false);
 
     ui->Genimon1->setVisible(true);
     ui->Genimon2->setVisible(true);
