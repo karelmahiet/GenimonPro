@@ -173,7 +173,7 @@
     <string>Nom :</string>
    </property>
   </widget>
-  <widget class="QLabel" name="Nom2">
+  <widget class="QLabel" name="Nom3">
    <property name="geometry">
     <rect>
      <x>380</x>
@@ -242,7 +242,7 @@
     <string/>
    </property>
   </widget>
-  <widget class="QLabel" name="Nom3">
+  <widget class="QLabel" name="Nom5">
    <property name="geometry">
     <rect>
      <x>700</x>
@@ -286,7 +286,7 @@
     <string/>
    </property>
   </widget>
-  <widget class="QLabel" name="Nom7">
+  <widget class="QLabel" name="Nom6">
    <property name="geometry">
     <rect>
      <x>700</x>
@@ -349,7 +349,7 @@
     <string>Nom :</string>
    </property>
    <property name="alignment">
-    <set>Qt::AlignmentFlag::AlignLeading|Qt::AlignmentFlag::AlignLeft|Qt::AlignmentFlag::AlignTop</set>
+    <set>Qt::AlignmentFlag::AlignLeading|Qt::AlignmentFlag::AlignLeft|Qt::AlignmentFlag::AlignVCenter</set>
    </property>
   </widget>
   <widget class="QLabel" name="Genimon8">
@@ -377,7 +377,7 @@
     <string/>
    </property>
   </widget>
-  <widget class="QLabel" name="Nom4">
+  <widget class="QLabel" name="Nom7">
    <property name="geometry">
     <rect>
      <x>960</x>
@@ -396,7 +396,7 @@
     <string>Nom :</string>
    </property>
   </widget>
-  <widget class="QLabel" name="Nom5">
+  <widget class="QLabel" name="Nom2">
    <property name="geometry">
     <rect>
      <x>120</x>
@@ -415,7 +415,7 @@
     <string>Nom :</string>
    </property>
   </widget>
-  <widget class="QLabel" name="Nom6">
+  <widget class="QLabel" name="Nom4">
    <property name="geometry">
     <rect>
      <x>380</x>
@@ -571,6 +571,37 @@
     <set>Qt::AlignmentFlag::AlignCenter</set>
    </property>
   </widget>
+  <widget class="QLabel" name="Contoles3">
+   <property name="geometry">
+    <rect>
+     <x>0</x>
+     <y>0</y>
+     <width>161</width>
+     <height>41</height>
+    </rect>
+   </property>
+   <property name="font">
+    <font>
+     <pointsize>16</pointsize>
+     <bold>false</bold>
+    </font>
+   </property>
+   <property name="autoFillBackground">
+    <bool>true</bool>
+   </property>
+   <property name="frameShape">
+    <enum>QFrame::Shape::Box</enum>
+   </property>
+   <property name="lineWidth">
+    <number>3</number>
+   </property>
+   <property name="text">
+    <string>Selectionner (1)</string>
+   </property>
+   <property name="alignment">
+    <set>Qt::AlignmentFlag::AlignCenter</set>
+   </property>
+  </widget>
   <zorder>BackGround</zorder>
   <zorder>Genimon4</zorder>
   <zorder>Genimon2</zorder>
@@ -578,23 +609,24 @@
   <zorder>Genimon6</zorder>
   <zorder>Genimon7</zorder>
   <zorder>Nom8</zorder>
-  <zorder>Nom2</zorder>
+  <zorder>Nom3</zorder>
   <zorder>Genimon</zorder>
   <zorder>Genimon3</zorder>
-  <zorder>Nom3</zorder>
+  <zorder>Nom5</zorder>
   <zorder>Genimon1</zorder>
-  <zorder>Nom7</zorder>
+  <zorder>Nom6</zorder>
   <zorder>Genimon5</zorder>
   <zorder>Description</zorder>
   <zorder>Genimon8</zorder>
+  <zorder>Nom7</zorder>
+  <zorder>Nom2</zorder>
   <zorder>Nom4</zorder>
-  <zorder>Nom5</zorder>
-  <zorder>Nom6</zorder>
   <zorder>Contoles1</zorder>
   <zorder>Info1</zorder>
   <zorder>Info2</zorder>
   <zorder>Contoles2</zorder>
   <zorder>Alerte</zorder>
+  <zorder>Contoles3</zorder>
  </widget>
  <resources>
   <include location="Image.qrc"/>

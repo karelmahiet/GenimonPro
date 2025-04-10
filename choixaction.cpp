@@ -131,8 +131,9 @@ void ChoixAction::update() {
             JOYSTICKS = 0;
             ACCEL = 0;
             MUONS = 0;
-            emit sendInfos(genimonEnCours_trans[0], nbBalles_trans, nbCapsuleGuerison_trans, genidex_trans);
-            emit requestMenuChange(4); //Passer au menu combat
+            emit sendGenidex(nbBalles_trans, nbCapsuleGuerison_trans, genidex_trans);
+            emit debutPreparationCombat(genimonEnCours_trans[0]);
+            emit requestMenuChange(5); //Passer au menu genidex
             clearFocus();
         }
     }

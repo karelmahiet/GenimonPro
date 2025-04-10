@@ -3,6 +3,10 @@
 #include <QEasingCurve>
 #include <string>
 
+#include <QLabel>
+
+
+
 Capture::Capture(QWidget* parent)
     : QWidget(parent)
     , ui(new Ui::Capture)
@@ -294,7 +298,14 @@ void Capture::animerPokeball(int nbRebond) {
 
     connect(animationA, &QPropertyAnimation::finished, this, [=]() {
         animationA->deleteLater();  // Supprimer l'animation après qu'elle soit terminée
+
+        // Lancer l'animation des confettis après que l'animationA soit terminée
+        QTimer::singleShot(500, this, [=]() {
+            // Lancer l'animation des confettis après un délai
+            animerConfettis((originalPos + QPoint(20, 100)), 350);  // Explosion des confettis autour de la Pokéball
+            });
         });
+
 
 
 
@@ -334,11 +345,55 @@ void Capture::animerPokeball(int nbRebond) {
         else
         {
 			CatchPlayer->play();
-            genidex_trans->push_back(genimonEnCours_trans[0]);
+            if (genidex_trans->size() < 8)
+            {
+                genidex_trans->push_back(genimonEnCours_trans[0]);
+            }
+            else
+            {
+                genidex_trans->pop_back();
+                genidex_trans->push_back(genimonEnCours_trans[0]);
+            }
             ui->Resultat->setText("Resultat: Capture reussie!");
             ui->Info1->setStyleSheet("background-color: grey;");
             animationA->start();
 			battleMusic->stop();
         }
         });
+}
+
+
+void Capture::animerConfettis(const QPoint& center, qreal rayon) {
+    // Créer plusieurs confettis (ici 150 confettis)
+    for (int i = 0; i < 150; ++i) {
+        // Créer un QLabel pour chaque confetti
+        QLabel* confetti = new QLabel(this);
+        confetti->setStyleSheet("background-color: rgba(" + QString::number(rand() % 256) + "," +
+            QString::number(rand() % 256) + "," +
+            QString::number(rand() % 256) + ", 1); border-radius: 5px;");
+        confetti->setFixedSize(10, 10);  // Taille du confetti (10x10 pixels)
+        //confetti->move(200,1000);  // Position initiale au centre de l'explosion
+        confetti->move(center);
+        confetti->raise();
+        confetti->show();
+
+        // Animation pour faire exploser le confetti autour du point (center)
+        qreal angle = rand() % 360;  // Angle aléatoire pour l'explosion
+        qreal distance = rand() % (int)rayon;  // Distance aléatoire pour l'explosion
+        QPointF endPoint = center + QPointF(cos(angle * M_PI / 180.0) * distance,
+            sin(angle * M_PI / 180.0) * distance);
+
+        QPropertyAnimation* animation = new QPropertyAnimation(confetti, "pos");
+        animation->setDuration(1500 + rand() % 500);  // Durée de l'animation
+        animation->setStartValue(confetti->pos());
+        animation->setEndValue(endPoint);  // Position finale de l'explosion
+        animation->start();
+
+        // Nettoyer les confettis après l'animation
+        QTimer::singleShot(animation->duration(), confetti, [confetti]() {
+            confetti->deleteLater();
+            });
+
+            
+    }
 }

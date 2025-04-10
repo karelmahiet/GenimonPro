@@ -62,7 +62,6 @@ void Map::fermerMenu()
 {
     joueur->hide();
     estSurMap = false;
-    spawnTimer2->stop();
 
     for (int i = 0; i < listeGenimons.count(); i++)
     {
@@ -380,8 +379,11 @@ void Map::gererCapsuleVieMap()
         int choix = rand() % 3;
         if (choix == 0)
         {
-            capsuleGuerison->show();
             capsuleGuerisonActive = true;
+            if (estSurMap)
+            {
+                capsuleGuerison->show();
+            }
         }
     }
 }
@@ -573,6 +575,7 @@ void Map::showChoixAction()
     emit requestMenuChange(10); //Passer au menu choixAction
     fermerMenu();
     spawnTimer1->stop();
+    spawnTimer2->stop();
 }
 
 void Map::showGenidex()
@@ -594,6 +597,7 @@ void Map::showPause()
     emit requestMenuChange(9); //Passer au menu pause
     fermerMenu();
     spawnTimer1->stop();
+    spawnTimer2->stop();
 
     outsideMusic->pause();
     insideMusic->pause();

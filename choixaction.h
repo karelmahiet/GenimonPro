@@ -38,6 +38,8 @@ private:
 signals:
     void requestMenuChange(int index);  // Signal pour demander un changement de menu
     void sendInfos(Genimon genimonEnCours, int* nbBalles, int* nbCapsuleGuerison, vector<Genimon>* genidex);
+    void sendGenidex(int* nbBalles, int* nbCapsuleGuerison, vector<Genimon>* genidex);
+    void debutPreparationCombat(Genimon genimonEnnemi);
 };
 
 #endif // CHOIXACTION_H

@@ -21,6 +21,9 @@ void Pause::handleKeyPress(int key) {
         QApplication::quit(); // Quitter
     }
     else if (key == Qt::Key_2) {
+        ui->Option3->setStyleSheet("background-color: red;");
+        ui->Option3->setText("Mode 5a8 (3) : OFF");
+        mode5a8Actif = false;
         emit reinitialiserJeu();
         emit requestMenuChange(0); //Passer au menu main
         clearFocus();
@@ -51,6 +54,9 @@ void Pause::handleArduinoInput(int boutons, int joystick, int accelerometre, int
         QApplication::quit(); // Quitter
     }
     else if (boutons == 2) {
+        ui->Option3->setStyleSheet("background-color: red;");
+        ui->Option3->setText("Mode 5a8 (3) : OFF");
+        mode5a8Actif = false;
         emit reinitialiserJeu();
         emit requestMenuChange(0); //Passer au menu main
         clearFocus();

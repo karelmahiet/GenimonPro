@@ -187,6 +187,7 @@ void Controle::changeMenu(int index)
     disconnect(combatMenu, &Combat::requestMenuChange, this, &Controle::changeMenu);
     disconnect(this, &Controle::sendKeyPress, genidexMenu, &Genidex::handleKeyPress);
     disconnect(genidexMenu, &Genidex::requestMenuChange, this, &Controle::changeMenu);
+    disconnect(genidexMenu, &Genidex::sendInfos, combatMenu, &Combat::recevoirInfos);
     disconnect(this, &Controle::sendKeyPress, histoRencontreMenu, &HistoRencontre::handleKeyPress);
     disconnect(histoRencontreMenu, &HistoRencontre::requestMenuChange, this, &Controle::changeMenu);
     disconnect(this, &Controle::sendKeyPress, commandeMenu, &Commande::handleKeyPress);
@@ -199,7 +200,8 @@ void Controle::changeMenu(int index)
     disconnect(this, &Controle::sendKeyPress, choixActionMenu, &ChoixAction::handleKeyPress);
     disconnect(choixActionMenu, &ChoixAction::requestMenuChange, this, &Controle::changeMenu);
     disconnect(choixActionMenu, &ChoixAction::sendInfos, captureMenu, &Capture::afficherInfoCapture);
-    disconnect(choixActionMenu, &ChoixAction::sendInfos, combatMenu, &Combat::recevoirInfos);
+    disconnect(choixActionMenu, &ChoixAction::sendGenidex, genidexMenu, &Genidex::setGenidex);
+    disconnect(choixActionMenu, &ChoixAction::debutPreparationCombat, genidexMenu, &Genidex::debuterPreparationCombat);
 
     disconnect(this, &Controle::sendManetteInput, choixJoueurMenu, &ChoixJoueur::handleArduinoInput);
     disconnect(this, &Controle::sendManetteInput, mapMenu, &Map::handleArduinoInput);
@@ -246,6 +248,7 @@ void Controle::changeMenu(int index)
     else if (index == 5) {
         connect(this, &Controle::sendKeyPress, genidexMenu, &Genidex::handleKeyPress);
         connect(genidexMenu, &Genidex::requestMenuChange, this, &Controle::changeMenu);
+        connect(genidexMenu, &Genidex::sendInfos, combatMenu, &Combat::recevoirInfos);
         connect(this, &Controle::sendManetteInput, genidexMenu, &Genidex::handleArduinoInput);
     }
     else if (index == 6) {
@@ -275,7 +278,8 @@ void Controle::changeMenu(int index)
         connect(this, &Controle::sendKeyPress, choixActionMenu, &ChoixAction::handleKeyPress);
         connect(choixActionMenu, &ChoixAction::requestMenuChange, this, &Controle::changeMenu);
         connect(choixActionMenu, &ChoixAction::sendInfos, captureMenu, &Capture::afficherInfoCapture);
-        connect(choixActionMenu, &ChoixAction::sendInfos, combatMenu, &Combat::recevoirInfos);
+        connect(choixActionMenu, &ChoixAction::sendGenidex, genidexMenu, &Genidex::setGenidex);
+        connect(choixActionMenu, &ChoixAction::debutPreparationCombat, genidexMenu, &Genidex::debuterPreparationCombat);
         connect(this, &Controle::sendManetteInput, choixActionMenu, &ChoixAction::handleArduinoInput);
     }
 }

@@ -3,6 +3,7 @@
 #include <QPixmap>
 #include <functional>
 #include "capture.h"
+#include <string>
 
 Combat::Combat(QWidget* parent)
     : QWidget(parent)
@@ -18,6 +19,9 @@ Combat::Combat(QWidget* parent)
 	battleMusic->setSource(QUrl::fromLocalFile("battle.wav"));
 	battleMusic->setLoops(QMediaPlayer::Infinite);
 
+    ui->Nb_bonus->setText("NbBonus: 0");
+    ui->Nb_attaque->setText("NbAttaques: 0");
+    ui->Nb_bouclier->setText("NbBoucliers: 0");
 }
 
 Combat::~Combat()
@@ -129,7 +133,7 @@ void Combat::showEvent(QShowEvent* event) {
     //qDebug() << "La fenêtre de combat est maintenant affichée!";
     transition();
     // Démarrer le timer pour exécuter la fonction combat après 3 secondes
-    TransTimer->start(3000);  // 3000 millisecondes = 3 secondes
+    TransTimer->start(3000);
 
     QWidget::showEvent(event);  // N'oublie pas d'appeler la méthode de base pour conserver le comportement normal
 }
@@ -152,16 +156,12 @@ void Combat::transition() {
     ui->Bloquer->setVisible(false);
     ui->Bonus->setVisible(false);
     ui->Alerte->setVisible(false);
+    ui->Contoles->setVisible(false);
 }
 
 
 
 void Combat::combat() {
-
-    nbBon = 9;
-    nbAtt = 9;
-    nbBou = 9;
-
     ui->BackGround->setPixmap(QPixmap(":/Decor/Image_Qt/Decor/AreneCombat.png"));
     ui->Genimon1->move(280, 280);
     ui->Genimon2->move(900, 140);
@@ -173,37 +173,30 @@ void Combat::combat() {
     ui->Nb_attaque->setVisible(true);
     ui->Nb_bouclier->setVisible(true);
     ui->Nb_bonus->setVisible(true);
-    ui->Manche->setVisible(true);
+    ui->Manche->setVisible(false);
     ui->Attaque->setVisible(true);
     ui->Bloquer->setVisible(true);
     ui->Bonus->setVisible(true);
 	ui->Alerte->setVisible(false);
+    ui->Contoles->setVisible(true);
     initialiserCombat();
 }
 
-void Combat::recevoirInfos(Genimon ennemi, int* nbBalles, int* nbCapsuleGuerison, std::vector<Genimon>* genidex) {
-    genidexDuJoueur = genidex;
+void Combat::recevoirInfos(Genimon ennemi, int* nbBalles, Genimon* joueur) {
     balles = nbBalles;
     genimonEnnemi = new Genimon(ennemi);
+    genimonJoueur = joueur;
 
-    if (genidex && !genidex->empty()) {
-        genimonJoueur = &genidex->at(0);
-    }
-    else {
-        genimonJoueur = nullptr;
-        ui->TableauInfo->setText("Vous n'avez aucun Genimon pour combattre!");
-        return;
-    }
     //joueur
     ui->Genimon1->setPixmap(genimonJoueur->imageGenimon.scaled(ui->Genimon1->size(), Qt::KeepAspectRatio));
-    ui->Nom1->setText(QString::fromStdString(genimonJoueur->getNom()));
+    ui->Nom1->setText(QString().append("Nom: " + genimonJoueur->getNom() + "\nDegats: " + to_string(genimonJoueur->getDegats())));
     int pvActuels = genimonJoueur->getPV();
     int pvMax = genimonJoueur->pvMax;
     ui->HP1->setText("PV : " + QString::number(pvActuels) + " / " + QString::number(pvMax));
 
     //ennemi
     ui->Genimon2->setPixmap(genimonEnnemi->imageGenimon.scaled(ui->Genimon2->size(), Qt::KeepAspectRatio));
-    ui->Nom2->setText(QString::fromStdString(genimonEnnemi->getNom()));
+    ui->Nom2->setText(QString().append("Nom: " + genimonEnnemi->getNom() + "\nDegats: " + to_string(genimonEnnemi->getDegats())));
     int pvActuels2 = genimonEnnemi->getPV();
     int pvMax2 = genimonEnnemi->pvMax;
     ui->HP2->setText("PV : " + QString::number(pvActuels2) + " / " + QString::number(pvMax2));
@@ -220,7 +213,7 @@ void Combat::btnAttaquer()
     {
         actionsJoueur.push_back(1);
         ui->TableauInfo->setText("Action " + QString::number(actionsJoueur.size()) + "/" + QString::number(nbToursJoueur));
-        ui->Nb_attaque->setText("NbAttaque: " + QString::number(nbAtt -= 1));
+        ui->Nb_attaque->setText("NbAttaque: " + QString::number(++nbAtt));
     }
 
     if (actionsJoueur.size() == nbToursJoueur)
@@ -243,7 +236,7 @@ void Combat::btnBouclier()
         bouclierJoueurActif = true;
 
         ui->TableauInfo->setText("Action " + QString::number(actionsJoueur.size()) + "/" + QString::number(nbToursJoueur));
-        ui->Nb_bouclier->setText("NbBouclier: " + QString::number(nbBou -= 1));
+        ui->Nb_bouclier->setText("NbBouclier: " + QString::number(++nbBou));
         bouclierJoueurActif = true;
 	}
 	else if (bouclierJoueurActif == true)
@@ -264,6 +257,13 @@ void Combat::gererCombatTourAdversaire()
     if (combatTermine) return;
 
     tourAdversaireEnCours = true;
+
+    nbAtt = 0;
+    nbBou = 0;
+    nbBon = 0;
+    ui->Nb_bonus->setText("NbBonus: " + QString::number(nbBon));
+    ui->Nb_attaque->setText("NbAttaques: " + QString::number(nbAtt));
+    ui->Nb_bouclier->setText("NbBoucliers: " + QString::number(nbBou));
 
     ui->TableauInfo->setText("Tour de " + QString::fromStdString(genimonEnnemi->getNom()));
 
@@ -369,7 +369,7 @@ void Combat::btnBonus()
     {
         actionsJoueur.push_back(3);
         ui->TableauInfo->setText("Action " + QString::number(actionsJoueur.size()) + "/" + QString::number(nbToursJoueur));
-        ui->Nb_bonus->setText("NbBonus: " + QString::number(nbBon -= 1));
+        ui->Nb_bonus->setText("NbBonus: " + QString::number(++nbBon));
     }
 
     if (actionsJoueur.size() == nbToursJoueur)
@@ -437,9 +437,10 @@ void Combat::executerActionSuivante()
             ui->TableauInfo->setText("Bravo ! " + QString::fromStdString(genimonEnnemi->getNom()) + " est K.O. ! \nTu as gagne !");
             actionsJoueur.clear();
             attenteActions = false;
+            combatTermine = true;
 
             QTimer::singleShot(4000, this, [=]() {
-                int ballesGagnees = 3 + (rand() % 5);//entre 3 et 7
+                int ballesGagnees = genimonEnnemi->getGainBalles();
                 *balles += ballesGagnees;
                 (*genimonJoueur).setPV(genimonJoueur->getPV());
                 ui->TableauInfo->setText("Tu gagnes " + QString::number(ballesGagnees) + " balles ! \n4 = retour a la map");
@@ -484,9 +485,9 @@ void Combat::initialiserCombat()
     nbAttaquesAdversaire = 0;
     nbBoucliersAdversaire = 0;
     nbBonusAdversaire = 0;
-    nbBon = 9;
-	nbAtt = 9;
-	nbBou = 9;
+    nbAtt = 0;
+    nbBou = 0;
+    nbBon = 0;
     ui->Nb_bonus->setText("NbBonus: " + QString::number(nbBon));
     ui->Nb_attaque->setText("NbAttaques: " + QString::number(nbAtt));
     ui->Nb_bouclier->setText("NbBoucliers: " + QString::number(nbBou));

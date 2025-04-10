@@ -44,6 +44,7 @@ private:
     QAudioOutput* battleOutput;
 
     void animerPokeball(int nbRebond);
+    void animerConfettis(const QPoint& center, qreal rayon);
     int compterRebond();
 
     void update();

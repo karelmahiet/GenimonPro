@@ -17,8 +17,7 @@ class Combat : public QWidget
     Q_OBJECT
 
 public:
-    void recevoirInfos(Genimon, int*, int*, std::vector<Genimon>*);
-    void updateHealthBarColor(QProgressBar*, int, int);
+    void recevoirInfos(Genimon genimonEnnemi, int* nbBalles, Genimon* genimonJoueur);
     void btnAttaquer();
     void btnBouclier();
     void gererCombatTourAdversaire();
@@ -35,17 +34,17 @@ public slots:
 private:
     void executerActionSuivante();
     int* balles = nullptr;
-    int nbAtt = 9;
-    int nbBou = 9;
-    int nbBon = 9;
     int indexActionJoueur = 0;
     Genimon* genimonJoueur;
     Genimon* genimonEnnemi;
     QMediaPlayer* battleMusic;
     QAudioOutput* battleOutput;
-    std::vector<Genimon>* genidexDuJoueur;
     std::vector<int> actionsJoueur;
     bool attenteActions = false;
+
+    int nbAtt = 0;
+    int nbBou = 0;
+    int nbBon = 0;
 
     int nbToursJoueur = 2;
     int nbAttaquesJoueur = 0;
@@ -70,9 +69,7 @@ private:
     QTimer* TransTimer;
     void transition();
     void combat();
-    void info();
     void showEvent(QShowEvent* event);
-    void setGenimonAdverse(Genimon* genimon);
 
     void update();
     int BOUTONS = 0;
